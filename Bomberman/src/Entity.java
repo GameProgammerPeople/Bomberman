@@ -25,4 +25,20 @@ public abstract class Entity {
     public void draw(){
         entityImage.draw(location.getX(), location.getY());
     }
+
+    public void setX(float x){
+        location.setX(x);
+    }
+
+    public void setY(float y){
+        location.setY(y);
+    }
+
+    public float getX(){
+        return location.getX();
+    }
+
+    public float getY(){
+        return location.getY();
+    }
 }

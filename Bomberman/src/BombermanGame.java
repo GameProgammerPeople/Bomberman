@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public class BombermanGame extends BasicGame{
 
-    Collection<Bomberman> bombermen = new ArrayList<Bomberman>();
+    Bomberman bombermen;
     Image background;
 
     public BombermanGame(String title) {
@@ -15,22 +15,29 @@ public class BombermanGame extends BasicGame{
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        background = new Image("land.jpg");
-        Image bomberman = new Image("BombermanSprite.jpeg");
-        Point bombermanLocation = new Point(50, 50);
-        bombermen.add(new Bomberman(bomberman, bombermanLocation));
+        background = new Image("Bomberbackground.jpeg");
+        Image bomberman = new Image("BombermanOpaque.png");
+        Point bombermanLocation = new Point(40, 60);
+        bombermen = new Bomberman(bomberman, bombermanLocation);
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        Input controller = gameContainer.getInput();
+        if(controller.isKeyDown(Input.KEY_A)){
+            bombermen.setX(bombermen.getX() - 1);
+        } else if(controller.isKeyDown(Input.KEY_D)){
+            bombermen.setX(bombermen.getX() + 1);
+        } else if(controller.isKeyDown(Input.KEY_W)){
+            bombermen.setY(bombermen.getY() - 1);
+        } else if(controller.isKeyDown(Input.KEY_S)){
+            bombermen.setY(bombermen.getY() + 1);
+        }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         background.draw();
-        for(Bomberman man : bombermen){
-            man.draw();
-        }
+        bombermen.draw();
     }
 }
